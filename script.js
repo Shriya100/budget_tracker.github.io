@@ -4,7 +4,7 @@ let currentPeriod = 'monthly';
 let totalExpenses = 0;
 
 // Gemini API Configuration
-const GEMINI_API_KEY = 'AIzaSyDQJ8KK8fJ9rJ9mJ9nJ9oJ9pJ9qJ9rJ9s'; // Default API key (replace with actual)
+const GEMINI_API_KEY = 'AIzaSyCTuEbrCmCyBIi0q2_mnXAyELL1WRlIOGA'; // Default API key (replace with actual)
 const GEMINI_API_URL = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-pro:generateContent';
 
 // Initialize the application
