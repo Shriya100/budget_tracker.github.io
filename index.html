@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Budget Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="logo">
+                <i class="fas fa-wallet"></i>
+                <h1>Smart Budget Tracker</h1>
+            </div>
+            <div class="total-display">
+                <span class="total-label">Total Spent</span>
+                <span class="total-amount" id="totalAmount">₹0</span>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Budget Input Section -->
+            <section class="budget-section">
+                <div class="card budget-card">
+                    <h2><i class="fas fa-calendar-alt"></i> Set Your Budget</h2>
+                    <div class="period-selector">
+                        <button class="period-btn active" data-period="monthly">
+                            <i class="fas fa-calendar-day"></i>
+                            Monthly Budget
+                        </button>
+                        <button class="period-btn" data-period="yearly">
+                            <i class="fas fa-calendar"></i>
+                            Yearly Budget
+                        </button>
+                    </div>
+                    <div class="budget-input-group">
+                        <label for="budgetAmount">Budget Amount</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-rupee-sign"></i>
+                            <input type="number" id="budgetAmount" placeholder="Enter your budget" min="0">
+                        </div>
+                        <button class="btn btn-primary" onclick="setBudget()">Set Budget</button>
+                    </div>
+                    <div class="budget-display" id="budgetDisplay" style="display: none;">
+                        <div class="budget-info">
+                            <span class="budget-label">Current Budget:</span>
+                            <span class="budget-value" id="currentBudget">₹0</span>
+                        </div>
+                        <div class="budget-remaining">
+                            <span class="remaining-label">Remaining:</span>
+                            <span class="remaining-value" id="remainingBudget">₹0</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Expense Input Section -->
+            <section class="expense-section">
+                <div class="card expense-card">
+                    <h2><i class="fas fa-plus-circle"></i> Add Expenses</h2>
+                    <div class="expense-categories">
+                        <div class="category-item">
+                            <label for="groceries">
+                                <i class="fas fa-shopping-cart"></i>
+                                Groceries
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="groceries" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <label for="transport">
+                                <i class="fas fa-car"></i>
+                                Transportation
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="transport" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <label for="utilities">
+                                <i class="fas fa-bolt"></i>
+                                Utilities
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="utilities" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <label for="entertainment">
+                                <i class="fas fa-film"></i>
+                                Entertainment
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="entertainment" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <label for="healthcare">
+                                <i class="fas fa-heartbeat"></i>
+                                Healthcare
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="healthcare" placeholder="0" min="0">
+                            </div>
+                        </div>
+                        <div class="category-item">
+                            <label for="miscellaneous">
+                                <i class="fas fa-ellipsis-h"></i>
+                                Miscellaneous
+                            </label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-rupee-sign"></i>
+                                <input type="number" id="miscellaneous" placeholder="0" min="0">
+                            </div>
+                        </div>
+                    </div>
+                    <button class="btn btn-success" onclick="calculateExpenses()">
+                        <i class="fas fa-calculator"></i>
+                        Calculate Total
+                    </button>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <div class="card results-card">
+                    <h2><i class="fas fa-chart-pie"></i> Expense Summary</h2>
+                    <div class="expense-breakdown" id="expenseBreakdown">
+                        <p class="no-data">Add expenses to see breakdown</p>
+                    </div>
+                    <div class="progress-bar-container" id="budgetProgress" style="display: none;">
+                        <div class="progress-label">Budget Usage</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill"></div>
+                        </div>
+                        <div class="progress-percentage" id="progressPercentage">0%</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- AI Advisor Section -->
+            <section class="ai-section">
+                <div class="card ai-card">
+                    <h2><i class="fas fa-robot"></i> AI Financial Advisor</h2>
+                    <div class="ai-controls">
+                        <button class="btn btn-ai" onclick="getAIAdvice()">
+                            <i class="fas fa-brain"></i>
+                            Get AI Advice
+                        </button>
+                        <button class="btn btn-ai" onclick="getInvestmentTips()">
+                            <i class="fas fa-chart-line"></i>
+                            Investment Tips
+                        </button>
+                    </div>
+                    <div class="ai-response" id="aiResponse">
+                        <div class="ai-placeholder">
+                            <i class="fas fa-lightbulb"></i>
+                            <p>Click above to get personalized financial advice based on your spending patterns!</p>
+                        </div>
+                    </div>
+                    <div class="loading" id="aiLoading" style="display: none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <span>AI is analyzing your data...</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Targets Section -->
+            <section class="targets-section">
+                <div class="card targets-card">
+                    <h2><i class="fas fa-bullseye"></i> Financial Targets</h2>
+                    <div class="targets-grid">
+                        <div class="target-item">
+                            <div class="target-icon">
+                                <i class="fas fa-piggy-bank"></i>
+                            </div>
+                            <h3>Emergency Fund</h3>
+                            <p>Save 6 months of expenses</p>
+                            <div class="target-progress">
+                                <div class="target-bar">
+                                    <div class="target-fill" style="width: 30%;"></div>
+                                </div>
+                                <span>30% Complete</span>
+                            </div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-icon">
+                                <i class="fas fa-home"></i>
+                            </div>
+                            <h3>Home Down Payment</h3>
+                            <p>Save ₹10,00,000 for home</p>
+                            <div class="target-progress">
+                                <div class="target-bar">
+                                    <div class="target-fill" style="width: 15%;"></div>
+                                </div>
+                                <span>15% Complete</span>
+                            </div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-icon">
+                                <i class="fas fa-plane"></i>
+                            </div>
+                            <h3>Vacation Fund</h3>
+                            <p>Save ₹1,50,000 for vacation</p>
+                            <div class="target-progress">
+                                <div class="target-bar">
+                                    <div class="target-fill" style="width: 60%;"></div>
+                                </div>
+                                <span>60% Complete</span>
+                            </div>
+                        </div>
+                        <div class="target-item">
+                            <div class="target-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h3>Education Fund</h3>
+                            <p>Save ₹5,00,000 for education</p>
+                            <div class="target-progress">
+                                <div class="target-bar">
+                                    <div class="target-fill" style="width: 45%;"></div>
+                                </div>
+                                <span>45% Complete</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
