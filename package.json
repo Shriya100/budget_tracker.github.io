@@ -1,0 +1,72 @@
+{
+  "name": "smart-budget-tracker",
+  "version": "1.0.0",
+  "description": "A beautiful and intuitive web-based budget tracking application with AI-powered financial advice",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx http-server . -p 8000 -o",
+    "dev": "npx live-server --port=8000 --open=/",
+    "build": "echo 'No build step required for static files'",
+    "test": "echo 'No tests specified' && exit 0",
+    "deploy": "gh-pages -d .",
+    "serve": "python -m http.server 8000"
+  },
+  "keywords": [
+    "budget",
+    "tracker",
+    "finance",
+    "money",
+    "expenses",
+    "ai",
+    "gemini",
+    "javascript",
+    "html",
+    "css",
+    "responsive",
+    "pwa",
+    "indian-rupees",
+    "financial-planning"
+  ],
+  "author": {
+    "name": "Smart Budget Team",
+    "email": "team@smartbudget.com",
+    "url": "https://github.com/smartbudget"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/smart-budget-tracker.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/smart-budget-tracker/issues"
+  },
+  "homepage": "https://yourusername.github.io/smart-budget-tracker",
+  "devDependencies": {
+    "http-server": "^14.1.1",
+    "live-server": "^1.2.2",
+    "gh-pages": "^6.0.0"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie <= 11"
+  ],
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "files": [
+    "index.html",
+    "style.css",
+    "script.js",
+    "README.md"
+  ],
+  "config": {
+    "port": "8000"
+  },
+  "funding": {
+    "type": "github",
+    "url": "https://github.com/sponsors/smartbudget"
+  }
+}
